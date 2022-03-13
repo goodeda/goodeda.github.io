@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Suomi
+categories: Suomi(Finnish)
 title: Matkani Ruotsissa 
 tags: Language-learning
 toc: false

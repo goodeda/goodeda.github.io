@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Chinese
+categories: 中文(Chinese)
 title: Poisson Process
 tags: math
 toc: true
