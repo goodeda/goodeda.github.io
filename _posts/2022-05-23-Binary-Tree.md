@@ -2,7 +2,7 @@
 layout: post
 categories: English
 title: Parsing mathematical expressions with tree structure
-tags: data-structure&algorithm
+tags: data-structure-algorithm
 toc: false
 date: 2022-05-23 20:22 +0300
 pin: false
