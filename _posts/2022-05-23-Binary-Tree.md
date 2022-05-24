@@ -97,15 +97,15 @@ preorder(buildParsetree("(3*(2+5))"))
 evaluate(buildParseTree("(3*(2+5))"))
 ```
 The result is 3*7=21 and by preorder function, we have all nodes in the tree which in order are */3/+/2/5.
-Things seem to have been solved so far. But I wonder if some parantheses are necessary in the expression.
+Things seem to have been solved so far. But I wonder if some parentheses are necessary in the expression.
 Here I have two more examples: 
 1) 2+(3*5) 
 2) (3+5)*2
-And this time I don't want the outside paranthesis.
+And this time I don't want the outside parenthesis.
 In order to do this, I made some modifications:
 ```python
 elif i not in ["+", "-", "*", "/", ")"]:# number
-            if currentTree.getroot_value()=="":# number without paranthese
+            if currentTree.getroot_value()=="":# number without parentheses
                 currentTree.insertleft(" ")
                 node_stack.append(currentTree)
                 currentTree = currentTree.getLeftchild()
@@ -114,7 +114,7 @@ elif i not in ["+", "-", "*", "/", ")"]:# number
             currentTree = parent
 ```
 If the root value is "" which means there is no operator encountered, then the number should be automatically put on the left side of current tree.
-Also, another issue is that if the operator is behind a paranthesis, it will replace the current operator. In this case, the whole subtree should be a leftchild node of a new Binary tree class.
+Also, another issue is that if the operator is behind a parenthesis, it will replace the current operator. In this case, the whole subtree should be a leftchild node of a new Binary tree class.
 So we need to have a new subtree and keep the original one as the leftchild. 
 ```python
 # add this function into the BinaryTree class
@@ -136,7 +136,7 @@ elif p in ["+", "-", "*", "/"]:
 ```
 Thus, the output of 2+(3*5)=17, and the nodes are \+/2/\*/3/5.
 Then the second example (3+5)*2=16 and nodes are \*/\+/3/5/2.
-Good, the uncessary paranthesis issue looks solved. 
+Good, the uncessary parenthesis issue looks solved. 
 However, I come up with another example, what will happen for 2+(3*5)/3?
 `evaluate(buildParseTree("2+(3*5)/3"))`
 Oops, the result is 5.667. The new problem is that we don't have any priority for the calculation so the program see the expression as (2+(3\*5))/3 which equals to 17/3=5.667
@@ -213,7 +213,7 @@ def buildParseTree(fpexp):
             currentTree = pStack.pop()
 
         elif i not in ['+', '-', '*', '/', ')']:
-            if currentTree.getroot_value()=="":# number without paranthese
+            if currentTree.getroot_value()=="":# number without parentheses
                 currentTree.insertLeft(" ")
                 pStack.append(currentTree)
                 currentTree = currentTree.getLeftChild()
