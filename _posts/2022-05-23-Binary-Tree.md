@@ -4,7 +4,7 @@ categories: English
 title: Parsing mathematical expressions with tree structure
 tags: data-structure-algorithm
 toc: false
-date: 2022-05-23 20:22 +0300
+date: 2022-05-24 22:00 +0300
 pin: false
 ---
 _Credit to [Problem solving with algorithms and data structures using Python](https://runestone.academy/ns/books/published/pythonds/Trees/ParseTree.html) section 7.5 & 7.6 & 7.7_
