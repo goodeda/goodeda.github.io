@@ -4,6 +4,7 @@ categories: English
 title: Chinese word segmentation statistical approach(II)
 tags: NLP word-segmentation
 toc: True
+math: true
 date: 2022-05-25 22:42 +0300
 pin: false
 ---
@@ -35,6 +36,7 @@ Here we can also see some drawbacks of this approach:
 2. N-gram usually performs better as N grows but also more computationally expensive.
 3. It still can't deal with unseen words which never appear in training data. (Regular expression only helps some but can't manage person's name)
 
-HMM model seems to be more effective in tackling OOV.
+HMM model seems to be more effective in tackling OOV.  
+
 Reference: [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/3.pdf)
 
