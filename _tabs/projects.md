@@ -4,7 +4,7 @@ icon: fas fa-info-circle
 order: 3
 excerpt_separator: <!--more-->
 ---
-The followings are some of my projects.
+Here are projects I worked on.
 <!--more-->
 <div class="d-flex flex-wrap">
     {% for project in site.categories.Projects %}
