@@ -5,7 +5,7 @@ title: Text Multilabel Classification using BERT
 name: Text Multilabel Classification using BERT
 tags: Projects
 description: This is a course project, applying BERT in text classification. The project will go through the entire process of the task.
-tools: [Pytorch, Transformers, Pandas, Sklearn]
+tools: [Pytorch,Transformers,Pandas,Sklearn]
 toc: True
 image: /assets/post_img/Distl_acc.png
 date: 2022-05-01 09:00 +0300
@@ -71,7 +71,8 @@ OK, we can see majorities are within 512 tokens.
 ### Data transformation and preparation
 
 1. Since the label is in format of string. For example, ['CCAT', C15''] or ['M14'].
-In order to convert the labels into a format we can use for calculating loss, it should be in one-hot encoding.
+In order to convert the labels into a format we can use for calculating loss, it should be in one-hot encoding.  
+
 ```python
 #transforming labels into one-hot encoding
 from sklearn.preprocessing import MultiLabelBinarizer
@@ -80,11 +81,11 @@ mlb = MultiLabelBinarizer(classes=df_lb["code"])
 def labels2binaries(label,model=mlb):
     return model.fit_transform(label)
 
-
 onehot_label = labels2binaries(df["LABEL"])
 df["label"] = onehot_label.tolist()
 df[['text','label']].to_csv("../data_files/lower_nosep_data.csv",index=False)
-```
+```  
+
 2. Preparing data
 The texts are still strings while machine doesn't recognize. For machine, each word is represented by an id.
 What's more, we usually use mini-batch for training in practice, allowing the process running in parallel.
@@ -121,7 +122,8 @@ class CustomDataset(Dataset):
     return {'ids': torch.tensor(ids, dtype=torch.long),'mask': torch.tensor(mask, dtype=torch.long),
             'token_type_ids': torch.tensor(token_type_ids, dtype=torch.long),
             'targets': torch.tensor(self.labels[index], dtype=torch.float)}
-```
+```  
+
 Here CustomDataset inherit from its parent class--Dataset. We, however, need to rewrite some methods.
 There is one thing worth to mention:
 in encode_plus(), parameter add_special_tokens=True, meaning every time at the beginning of a sentence, there will be a special token [CLS] and at the end [SEP];
