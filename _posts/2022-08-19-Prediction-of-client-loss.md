@@ -258,7 +258,7 @@ plt.show()
 ![](https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/important_feature.png)
 Aha, the days_from_last_to_end and max_flight_interval rank top 2.
 
-This project goes through almost the entire process of data analysis and applying machine learning in prediction. The final score looks pretty good. However, I know in real life the case will be much more complex and lots of information could be missing because of certain regulations or individual wills. The prediction is also not that easy to make. In a word, this is an introductory example of how to use machine learning in analysis. In my opinion, sometimes complex models are not the core of data analysis but the business insights and the interpretation of the results based on one's experience and accumulated intuition. That is what really matters.
+This project goes through almost the entire process of data analysis and applying machine learning in prediction. The final score looks pretty good. However, I know in real life the case will be much more complex and lots of information could be missing because of certain regulations or individual wills. The prediction is also not that easy to make. In a word, this is an introductory example of how to use machine learning in analysis. In my opinion, sometimes the core of data analysis is not complex models or algorithms but the business insights and the interpretation of the results based on one's accumulated experience and intuition. That is what really matters.
 I put all code in jupyter notebook and store it [here](https://colab.research.google.com/drive/1J-_hefp7EKIl5CmFce8ZXG4pn0nBgDc3?usp=sharing).
 
 
