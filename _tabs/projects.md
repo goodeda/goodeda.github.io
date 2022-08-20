@@ -1,6 +1,6 @@
 ---
 title: Projects
-icon: fas fa-info-circle
+icon: fas fa-free-code-camp
 order: 3
 excerpt_separator: <!--more-->
 ---
