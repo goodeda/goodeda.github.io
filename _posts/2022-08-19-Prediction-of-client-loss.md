@@ -12,7 +12,7 @@ date: 2022-08-19 09:00 +0300
 pin: False
 ---
 ### Project description
-So this project was acutally done in my undergraduate course--_machine learning & data mining_. The topic is about the airline company's customer analysis and prediction. The dataset consists of 60k+ pieces of feature information. I mainly practised using pandas, sklearn and other python packages. 
+So this project was acutally done in my undergraduate course--_machine learning & data mining_. The topic is about the airline company's customer analysis and prediction. The dataset consists of 60k+ pieces of feature information. I mainly practised using pandas, sklearn and other python packages.   
 In order to run the code, pandas, numpy, seaborn, matplotlib, scikit-learn and scipy are required.
 ```
 import pandas as pd
@@ -140,7 +140,7 @@ plt.legend()
 plt.show()
 ```
 ![](https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/lost_cust_class.png)
-Here from the bar chart, it's clear that the higher class customers are more loyal. Most losses happen in the class-4 group. Thus, when it comes to taking actions to recall lost customers or keep retention, attention should be put on class-4 group. What's more, if we want to prevent the situation from happening later, we should attract more customers to update to class-5/6 and raise their loyalty.
+Here from the bar chart, it's clear that the higher class customers are more loyal. Most losses happen in the class-4 group. Thus, when it comes to taking actions to recall lost customers or keep retention, attention should be put on class-4 group. What's more, if we want to prevent the situation from happening later, we should attract more customers to update to class-5/6 and raise their loyalty.  
 ##### **Membership time**
 ```
 print(air_data.groupby("runoff_flag")["FFP_days"].describe())
@@ -148,11 +148,11 @@ plt.boxplot([data.FFP_days[data.runoff_flag==0],data.FFP_days[data.runoff_flag==
 plt.title("Stayed and lost customers as well as membership time")
 plt.show()
 ```
-![](https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/FFP_days_all.png)
+![](https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/FFP_days_all.png)  
 
 ##### **Flights**
-![](https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/Avg_flight_all.png)
-Maybe this plot doesn't make so much sense in axis-x. It shows how much the area of blue (stayed group) exceeds the red area. Of course, it makes sense that the flights of stayed group are larger. 
+![](https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/Avg_flight_all.png)  
+Maybe this plot doesn't make so much sense in axis-x. It shows how much the area of blue (stayed group) exceeds the red area. Of course, it makes sense that the flights of stayed group are larger.  
 ##### **Last flight time gap**
 ```
 print(air_data["DAYS_FROM_LAST_TO_END"].value_counts())
@@ -163,7 +163,7 @@ plt.ylabel("Number of people")
 plt.show()
 ```
 ![](https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/last2end.png)
-The plot measures the time from the last flight to the end of observation time. For example, those cases whose gap is 400+ days mean the last time they choose the airline is about 1+ years ago.
+The plot measures the time from the last flight to the end of observation time. For example, those cases whose gap is 400+ days mean the last time they choose the airline is about 1+ years ago.  
 
 ##### **Others**
 ```
@@ -171,7 +171,7 @@ print(air_data.groupby("runoff_flag")["WEIGHTED_SEG_KM"].describe())
 print(air_data.groupby("runoff_flag")["avg_discount"].describe())
 ```
 ### Prediction with machine learning
-So far we've done pretty much about knowing the customers. This section we should do the prediction task. 
+So far we've done pretty much about knowing the customers. This section we should do the prediction task.   
 ```
 air_data_ = air_data.iloc[:,:53]
 air_data_["FFP_days"]=air_data["FFP_days"]
@@ -180,7 +180,7 @@ del air_data_["FFP_TIER"]
 air_data_["label"]=air_data["runoff_flag"]
 air_data_.head()
 ```
-Since the membership level is string format with three different types, they should be converted into one-hot encoding. As a result of that, class-4 would be [1, 0, 0] and class-5 should be [0, 1, 0] and class-6 is [0, 0, 1].
+Since the membership level is string format with three different types, they should be converted into one-hot encoding. As a result of that, class-4 would be [1, 0, 0] and class-5 should be [0, 1, 0] and class-6 is [0, 0, 1].  
 ```
 X=air_data_.iloc[:,:-1]
 y=air_data_.iloc[:,-1]
@@ -188,7 +188,7 @@ scaler=StandardScaler()
 X_=scaler.fit_transform(X)
 X_train,X_test,y_train,y_test=train_test_split(X_,y,train_size=0.75,random_state=123)
 ```
-Use _train_test_split_ to divide the original data and get ready for model input.
+Use _train_test_split_ to divide the original data and get ready for model input.  
 #### **Linear Regression**
 ```
 log_reg = LogisticRegression(max_iter=1000)
