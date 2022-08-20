@@ -12,8 +12,8 @@ date: 2022-08-19 09:00 +0300
 pin: False
 ---
 ### Project description
-So this project was acutally done in my undergraduate course--_machine learning & data mining_. I mainly practised using pandas, sklearn and other python packages. 
-In order to run the code, pandas, numpy, seaborn, matplotlib, scikit-learn have to be installed.
+So this project was acutally done in my undergraduate course--_machine learning & data mining_. The topic is about the airline company's customer analysis and prediction. The dataset consists of 60k+ pieces of feature information. I mainly practised using pandas, sklearn and other python packages. 
+In order to run the code, pandas, numpy, seaborn, matplotlib, scikit-learn and scipy are required.
 ```
 import pandas as pd
 import numpy as np
@@ -26,9 +26,9 @@ from sklearn.model_selection import train_test_split,GridSearchCV
 from sklearn.metrics import classification_report,confusion_matrix,roc_auc_score,accuracy_score,roc_curve,auc
 from sklearn.preprocessing import StandardScaler
 ```
-Several functions should be imported before we start the formal work.
+Several packages should be imported before we start the formal work.
 ### Know your customers (Data exploration)
-#### Reading file
+#### **Reading file**
 ```
 data=pd.read_csv("airlin_runoff.csv",encoding="gb18030")#make sure the data file in under the same folder where the code file is stored
 air_data=data.copy()
@@ -36,7 +36,7 @@ air_data=air_data.iloc[:,2:]#the first two variables are meaningless so just dro
 air_data["runoff_flag"]=air_data["runoff_flag"].astype(int)
 ```
 The first step--loading the data is done.
-#### client features
+#### **client features**
 ```
 plt.bar(air_data["age"].value_counts().index,air_data["age"].value_counts(),color="skyblue") 
 plt.title("Distribution of client ages")
@@ -44,11 +44,11 @@ plt.xlabel("Age")
 plt.ylabel("Number of people")
 plt.show()
 ```
-##### Age
+##### **Age**
 By running above code, we get the distribution graph.
 ![](https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/age_distr.png)
 From the distribution, we see the major customer group is the middle-aged clients whose age ranges from 30 to 50. However, there are some exceptional data as well. For example, some cases are clients under 18 or above 80. Considering the later prediction task, these cases are very difficult to predict since they are not likely to make decision independently. 
-##### Filtering missing values
+##### **Filtering missing values**
 Apart form that, by running `air_data.isna().sum()`, we can see if there is any missing value in each feature.
 ```
 air_data=air_data[(air_data.age >18) & (air_data.age<80)]
@@ -64,7 +64,7 @@ After that we want to check to what are values of EXPENSE_SUM_YR_1/2 which means
 ```
 air_data=air_data[(air_data.EXPENSE_SUM_YR_1!=0)|(air_data.EXPENSE_SUM_YR_2!=0)] # if the case's expense in two consecutive years is zero, then drop it.
 ```
-##### Gender
+##### **Gender**
 ```
 print(air_data["GENDER"].value_counts()) # 1 for male and 0 for female
 plt.pie(air_data["GENDER"].value_counts(),labels=["M","F"],autopct='%1.1f%%',colors=sns.color_palette())
@@ -73,7 +73,7 @@ plt.title("Male & Female customers")
 plt.show()
 ```
 ![](https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/m_f.png)  
-Almost third fourths of customers are male. Then what can we do to dig out more useful information?
+Almost third fourths of customers are male. Then what can we do for more useful information?
 
 ```
 print(air_data.groupby(["GENDER"])["runoff_flag"].value_counts().loc[:,[0,1]])
@@ -90,7 +90,7 @@ plt.title("Stayed and lost clients in gender group")
 plt.legend()
 plt.show()
 ```
-![](https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/gender_cust_lost.png)
+![](https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/cust_lost_all.png)
 ```
 #if there is a significant difference for male and female client loss
 from scipy.stats import chi2_contingency
@@ -103,7 +103,7 @@ else:
     print("Accept null, there is no difference")
 ```
 As the result shows that there is a certain correlation between gender and clients losts.
-##### Membership level
+##### **Membership level**
 ```
 # Convert the class into string format
 def classify(x):
@@ -124,6 +124,7 @@ plt.title("Membership level and number")
 plt.show()
 ```
 ![](https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/FFP.png)
+Most of memberships are class-4, so I guess this is a general, basic level.
 Then let's see if the level affects customer loss.
 ```
 xlabel=["4-class","5-class","6-class"]
@@ -139,19 +140,20 @@ plt.legend()
 plt.show()
 ```
 ![](https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/lost_cust_class.png)
-Here from the bar chart, it's clear that the higher class customers are more loyal. Most losses happen in the class-4 group. Thus, when it comes to taking actions to recall lost customers, focus should be put on class-4 group. What's more, if we want to prevent the situation from happening later, we should try to let more customers update to class-5/6 and raise their loyalty.
-##### Membership time
+Here from the bar chart, it's clear that the higher class customers are more loyal. Most losses happen in the class-4 group. Thus, when it comes to taking actions to recall lost customers or keep retention, attention should be put on class-4 group. What's more, if we want to prevent the situation from happening later, we should attract more customers to update to class-5/6 and raise their loyalty.
+##### **Membership time**
 ```
 print(air_data.groupby("runoff_flag")["FFP_days"].describe())
 plt.boxplot([data.FFP_days[data.runoff_flag==0],data.FFP_days[data.runoff_flag==1]],labels=["stayed","lost"])
 plt.title("Stayed and lost customers as well as membership time")
 plt.show()
 ```
-![]()
+![](https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/FFP_days_all.png)
 
-##### Flights
+##### **Flights**
 ![](https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/Avg_flight_all.png)
-##### Last flight time gap
+Maybe this plot doesn't make so much sense in axis-x. It shows how much the area of blue (stayed group) exceeds the red area. Of course, it makes sense that the flights of stayed group are larger. 
+##### **Last flight time gap**
 ```
 print(air_data["DAYS_FROM_LAST_TO_END"].value_counts())
 plt.bar(air_data["DAYS_FROM_LAST_TO_END"].value_counts().index,air_data["DAYS_FROM_LAST_TO_END"].value_counts(),color="blue")
@@ -160,10 +162,10 @@ plt.xlabel("days")
 plt.ylabel("Number of people")
 plt.show()
 ```
-![]()
+![](https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/last2end.png)
 The plot measures the time from the last flight to the end of observation time. For example, those cases whose gap is 400+ days mean the last time they choose the airline is about 1+ years ago.
 
-##### Others
+##### **Others**
 ```
 print(air_data.groupby("runoff_flag")["WEIGHTED_SEG_KM"].describe())
 print(air_data.groupby("runoff_flag")["avg_discount"].describe())
@@ -187,7 +189,7 @@ X_=scaler.fit_transform(X)
 X_train,X_test,y_train,y_test=train_test_split(X_,y,train_size=0.75,random_state=123)
 ```
 Use _train_test_split_ to divide the original data and get ready for model input.
-#### Linear Regression
+#### **Linear Regression**
 ```
 log_reg = LogisticRegression(max_iter=1000)
 start=time.perf_counter()
@@ -203,7 +205,7 @@ print("AUC score：",roc_auc_score(y_test,log_reg_y_predict[:,1]))
 print("Confusion matrix\n",confusion_matrix(y_test,log_reg_y_pre))
 ```
 The above block returns a very high accuracy--0.99 on test dataset. Nevertheless, the extremely high accuracy is not necessarily a good sign because it could be overfitting. Overfitting happens when the model focuses too much on the provided data and it may lost the generalization when encountering unseen data or some noises.
-#### Random Forest
+#### **Random Forest**
 Random forest is a kind of ensemble learning. There is less chance for this model to overfit on this dataset. The model is also usually more robust.
 But there are actually many key hyperparameters to set up. In order to gain the optimal one, we use _GridSearchCV_.
 ```
@@ -231,7 +233,7 @@ print("Confusion matrix\n",confusion_matrix(y_test,rnd_y_pre))
 print("Out of bag score；",rnd.oob_score_)
 ```
 The accuracy ends up with 0.98 which is almost perfect.
-#### Cross-validation
+#### **Cross-validation**
 Finally we check the model with k-fold validation:
 ```
 from sklearn.model_selection import cross_val_score
@@ -247,7 +249,7 @@ feature_names=list(air_data_.columns)
 res =sorted(zip(map(lambda x: round(x, 4),rnd.feature_importances_), feature_names), reverse=True)  
 names=[feature[1] for feature in res[:15]]
 importances=[feature[0] for feature in res[:15]]
-plt.figure(figsize=(15,6))
+plt.figure(figsize=(15,6))  
 plt.bar(x=0,bottom=np.arange(len(names),0,-1), height=0.5, width=importances, orientation="horizontal")
 plt.yticks(np.arange(len(names),0,-1),names)
 plt.title("Importance of features")
@@ -257,7 +259,7 @@ plt.show()
 Aha, the days_from_last_to_end and max_flight_interval rank top 2.
 
 This project goes through almost the entire process of data analysis and applying machine learning in prediction. The final score looks pretty good. However, I know in real life the case will be much more complex and lots of information could be missing because of certain regulations or individual wills. The prediction is also not that easy to make. In a word, this is an introductory example of how to use machine learning in analysis. In my opinion, sometimes complex models are not the core of data analysis but the business insights and the interpretation of the results based on one's experience and accumulated intuition. That is what really matters.
-I put all code in jupyter notebook and store it [here]().
+I put all code in jupyter notebook and store it [here](https://colab.research.google.com/drive/1J-_hefp7EKIl5CmFce8ZXG4pn0nBgDc3?usp=sharing).
 
 
 
