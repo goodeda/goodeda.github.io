@@ -5,7 +5,7 @@ title: Matkani Ruotsissa
 tags: Language-learning
 toc: false
 date: 2022-03-13 19:52 +0300
-pin: true
+pin: false
 ---
   
 Minä menin Ruotsiin lentokoneella viime viikonloppuna. Minä saavuin tukholmaan yhdeltätoista. Sitten menin bussilla kaupunkikeskukseen lentoasemalta. Lipun hinta oli kaksitoista euroa. Iltäpäivällä minä ostin t-paidan ja takkeja, ja kävelin vanhassakaupungissa. Sää oli aurinkoinen ja lämmin. Rakennukset olivat historiallisia ja kauniita. Kadulla oli paljon matkailijoita. Illalla minä söin lohikeittoa, paistettua lohta ja mansikkakakkua. Päivällinen oli herkullinen, mutta kakku oli liian makea.  
