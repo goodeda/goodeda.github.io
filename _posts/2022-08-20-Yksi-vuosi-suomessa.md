@@ -1,7 +1,7 @@
 ---
 layout: post
 categories: Suomi(Finnish)
-title: Elämäni suomessa
+title: Elämäni Suomessa
 tags: Language-learning
 toc: false
 date: 2022-08-21 07:22 +0300
