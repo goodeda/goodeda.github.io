@@ -7,6 +7,7 @@ toc: false
 date: 2022-08-21 07:22 +0300
 pin: true
 ---
+
 # Aikani Suomessa
 Tulin Suomeen viime vuonna tänään. Vielä muistin, että kantoin kaksi matkalaukkua ja kävin kaupunkikeskuksessa. Se oli ensimainen kertani käytämään P-junaa. Olen asunnut Helsingissä yksi vuosi. Minä pitään Helsingistä, vaikka se ei ole suuria. Ihmiset täällä ovät ystävällinen. 
 ### Opiskelemisesta
