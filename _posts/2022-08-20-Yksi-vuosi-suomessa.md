@@ -1,14 +1,14 @@
 ---
 layout: post
 categories: Suomi(Finnish)
-title: Elämäni suomessa vuonna
+title: Elämäni suomessa
 tags: Language-learning
 toc: false
 date: 2022-08-21 07:22 +0300
 pin: true
 ---
 
-# Aikani Suomessa
+### Aikani Suomessa
 Tulin Suomeen viime vuonna tänään. Vielä muistin, että kantoin kaksi matkalaukkua ja kävin kaupunkikeskuksessa. Se oli ensimainen kertani käytämään P-junaa. Olen asunnut Helsingissä yksi vuosi. Minä pitään Helsingistä, vaikka se ei ole suuria. Ihmiset täällä ovät ystävällinen. 
 ### Opiskelemisesta
 Helsingin yliopisto on kuuluisa maailmassa. Voin tutustua kansainvälisiin koulukavereihin yliopistossa. Minä nautin yliopiston opiskelutyylistä koska osaan valita kursseja vapaasti. Kirjasto on minun lempipaikkani, jossa on viileä ja rauhallinen koko vuoden. Voin lainata erilaisia kirjoja tuosta. Osallistun usein ohjelmani keskusteluun ja toimimisiin. Kurssit myös kiinnostavat minua.
