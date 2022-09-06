@@ -4,8 +4,7 @@ icon: fas fa-user-circle
 order: 4
 ---
 
-> Hi, there! I'm Zhixu and very glad you visit my personal website. I'm currently a master student at the University of Helsinki. I would like to share my study notes about Natural Language Processing and Finnish learning here. Feel free to look around.    
-Hei, Nimeni on Zhixu ja tunnun onnellinen, että sinä vierailet verkkosivustossani. Minä olen maisteri-opiskelija Helsingin yliopistossa ja opiskelen kieliteknologia. Haluaisin julkaista blogia NLP:sta sekä suomen-oppimiseni tällä. Olet vapaa katsomaan.
+> Hi, there! I'm Zhixu and very glad you visit my personal website. I'm currently a master student at the University of Helsinki. My major is language technology/natural language processing. I would like to share my study notes about NLP and Finnish learning here. Please feel free to look around. 
 
 My had a number of math & programming courses in my undergraduate study, including Calculus, Linear algebra, Probabilities & Statistics, Applied Stochastic Process, Mathematical modelling, Econometrics, Machine learning and data mining, and Python & Big data.
 I also list some master-level courses that I took at UH:
