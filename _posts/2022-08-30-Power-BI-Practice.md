@@ -2,7 +2,7 @@
 layout: post
 categories: English
 title: Power BI practice for data visualization
-tags: Visualization, POWER BI
+tags: Visualization, POWER-BI
 toc: false
 date: 2022-08-30 00:29 +0300
 ---
