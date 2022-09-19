@@ -3,7 +3,8 @@ layout: post
 categories: English
 title: App analysis with review information on google play
 tags: Visualization, POWER-BI
-toc: false
+toc: true
+pin: true
 date: 2022-09-14 23:13 +0300
 ---
 ## Introduction
@@ -15,13 +16,13 @@ I used python api and scraped reviews of those three applications. By visualisin
 <iframe title="app_visual" width="600" height="486" src="https://app.powerbi.com/view?r=eyJrIjoiYjU5YWU2ODQtNjY5NS00OTFiLWFmN2EtMjljM2I3YmU4ZDQ5IiwidCI6IjcwZTNmODZhLWRjZTYtNDBhZS05MzYxLWY3NWY0MmE1ODZhMyIsImMiOjh9&pageName=ReportSection" frameborder="0" allowFullScreen="true"></iframe>
 
 ## Analysis/Interpretation
-The data collection is as of the beginning of September so it might not be the latest values shown on google-play app.  
+The data is automatically collected with google-play-scrape API and it's as of the beginning of September so might not be the latest values shown on google play store. I only analyze the results I got and won't make any personal judgement on the apps.
 
 ### Overall score
-Nordea has the most highest average score among the three banks. The rating of Danske bank is the lowest, 2.61/5.0.  
+Nordea has the most highest average (4.16) score among the three banks. The rating of Danske bank is the lowest, 2.61/5.0.  
 
-### Relation of Review length and score
-Looking at the plot on upper right side, there is an interesting trend of review length and score. If the score goes higher, the review tends to be shorter. Otherwise, people complain more and the ratings drop. This is particulary true in Nordea. We can see a nosedive in score over the time of June, 2018. The plot actually makes sense because if customers are satisfyied with the app, they usually just comment with "hyva" "helppo" or "good". However, if the app broke down or some bugs happened, users are more likely say a lot about the problems and complain.  
+### Relation between Review length and score
+Looking at the plot on upper right side, there is an interesting trend of review length and score. If the score goes higher, the review tends to be shorter. Otherwise, people complain more and the ratings drop. This is particulary true in Nordea. We can see a nosedive in score over the time of June, 2018. The plot actually makes sense because if customers are satisfyied with the app, they usually just comment with "hyva" "helppo" or "good". However, if the app broke down or some bugs happened, users are more likely to complain a lot about the problems. 
 
 Something must happened in 2018 as all apps witnessed a dramastic drop on the ratings. It could be caused by version update or some regulations.  
 
@@ -40,5 +41,5 @@ Based on the collected data, we also know the operating time of Nordea and OP ba
 There are actually more information can be explored. For example, what did customer complain about in reviews? Does frequent iteration of versions affect the app reputation?   
 Sentiment analysis is feasible but it could be challenging to do so as there are just a few models in dealing with Finnish texts.    
 
-I feel quite pround about this mini-report because I do it from scratch, from data collection, data wrangling and visualization. There must be many places can be improved and I wish to develop my visualization skills more in the future projects or work.
+I feel quite proud of this mini-report because I do it from scratch, from data collection, data wrangling to final visualization. There must be many places can be improved and I wish to develop my visualization skills more in the future projects or work.
 
