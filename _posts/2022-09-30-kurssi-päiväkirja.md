@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Suomi
+categories: Suomi(Finnish)
 title: Keskustelu ystäväni kanssa
 tags: päiväkirja
 toc: false

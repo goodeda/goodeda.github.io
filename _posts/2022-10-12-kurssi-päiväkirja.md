@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Suomi
+categories: Suomi(Finnish)
 title: Vaikea suomi
 tags: päiväkirja
 toc: false

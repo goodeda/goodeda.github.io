@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Suomi
+categories: Suomi(Finnish)
 title: Hyvää syksyä
 tags: päiväkirja
 toc: false

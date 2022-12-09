@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Suomi
+categories: Suomi(Finnish)
 title: Elokuva--Avatar
 tags: päiväkirja
 toc: false

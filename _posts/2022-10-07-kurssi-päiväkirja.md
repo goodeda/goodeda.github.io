@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Suomi
+categories: Suomi(Finnish)
 title: Minun tutkielma
 tags: päiväkirja
 toc: false
