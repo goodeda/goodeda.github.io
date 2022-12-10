@@ -4,8 +4,8 @@ categories: Suomi(Finnish)
 title: Hyvää syksyä
 tags: päiväkirja
 toc: false
-pin: false
 date: 2022-10-09 17:00 +0300
+pin: false
 ---
 
 Kaunis taivas! Tyykkän tästä ilmastosta. Tietän syksy on ihan lyhyt Suomessa. Mahdollisesti sata lunta kuukauden jälkeen, siksi vaalitaan ja muistetaan tätä aikaa. Niin, tänään minä päätin matkustamaan ulkomailla 21-25. Olen ostanut lentolippun ja varanut huonetta. 
