@@ -1,0 +1,293 @@
+<!DOCTYPE html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="generator" content="Jekyll v4.2.2" /><meta property="og:title" content="Analyse the loss of airline client" /><meta property="og:locale" content="en" /><meta name="description" content="This project is about data analysis on the airline clients. Descriptive analysis on features of customers. Then it follows with predicting if customers still choose the company." /><meta property="og:description" content="This project is about data analysis on the airline clients. Descriptive analysis on features of customers. Then it follows with predicting if customers still choose the company." /><link rel="canonical" href="https://goodeda.github.io/posts/Prediction-of-client-loss/" /><meta property="og:url" content="https://goodeda.github.io/posts/Prediction-of-client-loss/" /><meta property="og:site_name" content="Zhixu" /><meta property="og:image" content="https://goodeda.github.io/assets/post_img/airline_project/Avg_flight_all.png" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2022-08-19T09:00:00+03:00" /><meta name="twitter:card" content="summary_large_image" /><meta property="twitter:image" content="https://goodeda.github.io/assets/post_img/airline_project/Avg_flight_all.png" /><meta property="twitter:title" content="Analyse the loss of airline client" /><meta name="twitter:site" content="@twitter_username" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-08-20T12:00:32+03:00","datePublished":"2022-08-19T09:00:00+03:00","description":"This project is about data analysis on the airline clients. Descriptive analysis on features of customers. Then it follows with predicting if customers still choose the company.","headline":"Analyse the loss of airline client","image":"https://goodeda.github.io/assets/post_img/airline_project/Avg_flight_all.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://goodeda.github.io/posts/Prediction-of-client-loss/"},"url":"https://goodeda.github.io/posts/Prediction-of-client-loss/"}</script><title>Analyse the loss of airline client | Zhixu</title><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="Zhixu"><meta name="application-name" content="Zhixu"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css"><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1/dist/magnific-popup.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get MODE_ATTR() { return "data-mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } static get ID() { return "mode-toggle"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener("change", () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage({ direction: ModeToggle.ID, message: this.modeStatus }, "*"); } } /* ModeToggle */ const toggle = new ModeToggle(); function flipMode() { if (toggle.hasMode) { if (toggle.isSysDarkPrefer) { if (toggle.isLightMode) { toggle.clearMode(); } else { toggle.setLight(); } } else { if (toggle.isDarkMode) { toggle.clearMode(); } else { toggle.setDark(); } } } else { if (toggle.isSysDarkPrefer) { toggle.setLight(); } else { toggle.setDark(); } } toggle.notify(); } /* flipMode() */ </script><body data-spy="scroll" data-target="#toc" data-topbar-visible="true"><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper text-center"><div id="avatar"> <a href="/" alt="avatar" class="mx-auto"> <img src=" /assets/img/favicon/android-chrome-512x512.png " alt="avatar" onerror="this.style.display='none'"> </a></div><div class="site-title mt-3"> <a href="/">Zhixu</a></div><div class="site-subtitle font-italic">NLP, mathematics and languages.</div></div><ul class="w-100"><li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>HOME</span> </a><li class="nav-item"> <a href="/categories/" class="nav-link"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>CATEGORIES</span> </a><li class="nav-item"> <a href="/tags/" class="nav-link"> <i class="fa-fw fas fa-tag ml-xl-3 mr-xl-3 unloaded"></i> <span>TAGS</span> </a><li class="nav-item"> <a href="/archives/" class="nav-link"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>ARCHIVES</span> </a><li class="nav-item"> <a href="/projects/" class="nav-link"> <i class="fa-fw fa fa-cubes ml-xl-3 mr-xl-3 unloaded"></i> <span>PROJECTS</span> </a><li class="nav-item"> <a href="/about/" class="nav-link"> <i class="fa-fw fas fa-user-circle ml-xl-3 mr-xl-3 unloaded"></i> <span>ABOUT</span> </a></ul><div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center align-items-center"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/goodeda" aria-label="github" target="_blank" rel="noopener"> <i class="fab fa-github"></i> </a> <a href="https://twitter.com/twitter_username" aria-label="twitter" target="_blank" rel="noopener"> <i class="fab fa-twitter"></i> </a> <a href=" javascript:location.href = 'mailto:' + ['guzhixu','outlook.com'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a> <a href="/feed.xml" aria-label="rss" > <i class="fas fa-rss"></i> </a></div></div><div id="topbar-wrapper" class="row justify-content-center"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> Home </a> </span> <span>Analyse the loss of airline client</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Search..."> </span> <span id="search-cancel" >Cancel</span></div></div><div id="main-wrapper"><div id="main"><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><h1 data-toc-skip>Analyse the loss of airline client</h1><div class="post-meta text-muted"><div> By <em> <a href="https://github.com/username">zhixu</a> </em></div><div class="d-flex"><div> <span> Posted <em class="timeago" data-ts="1660888800" data-toggle="tooltip" data-placement="bottom" data-tooltip-df="llll" > 2022-08-19 </em> </span> <span> Updated <em class="timeago" data-ts="1660986032" data-toggle="tooltip" data-placement="bottom" data-tooltip-df="llll" > 2022-08-20 </em> </span> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="1360 words"> <em>7 min</em> read</span></div></div></div><div class="post-content"><h3 id="project-description"><span class="mr-2">Project description</span><a href="#project-description" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3></h3><p>So this project was acutally done in my undergraduate course–<em>machine learning &amp; data mining</em>. The topic is about the airline company’s customer analysis and prediction. The dataset consists of 60k+ pieces of feature information. I mainly practised using pandas, sklearn and other python packages. <br /> In order to run the code, pandas, numpy, seaborn, matplotlib, scikit-learn and scipy are required.</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre>import pandas as pd
+import numpy as np
+import seaborn as sns
+import time
+import matplotlib.pyplot as plt
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split,GridSearchCV
+from sklearn.metrics import classification_report,confusion_matrix,roc_auc_score,accuracy_score,roc_curve,auc
+from sklearn.preprocessing import StandardScaler
+</pre></table></code></div></div><p>Several packages should be imported before we start the formal work.</p><h3 id="know-your-customers-data-exploration"><span class="mr-2">Know your customers (Data exploration)</span><a href="#know-your-customers-data-exploration" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3></h3><h4 id="reading-file"><span class="mr-2"><strong>Reading file</strong></span><a href="#reading-file" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4></h4><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre>data=pd.read_csv("airlin_runoff.csv",encoding="gb18030")#make sure the data file in under the same folder where the code file is stored
+air_data=data.copy()
+air_data=air_data.iloc[:,2:]#the first two variables are meaningless so just drop it
+air_data["runoff_flag"]=air_data["runoff_flag"].astype(int)
+</pre></table></code></div></div><p>The first step–loading the data is done.</p><h4 id="client-features"><span class="mr-2"><strong>client features</strong></span><a href="#client-features" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4></h4><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre>plt.bar(air_data["age"].value_counts().index,air_data["age"].value_counts(),color="skyblue") 
+plt.title("Distribution of client ages")
+plt.xlabel("Age")
+plt.ylabel("Number of people")
+plt.show()
+</pre></table></code></div></div><h5 id="age"><span class="mr-2"><strong>Age</strong></span><a href="#age" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h5></h5><p>By running above code, we get the distribution graph. <img data-src="https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/age_distr.png" alt="" data-proofer-ignore> From the distribution, we see the major customer group is the middle-aged clients whose age ranges from 30 to 50. However, there are some exceptional data as well. For example, some cases are clients under 18 or above 80. Considering the later prediction task, these cases are very difficult to predict since they are not likely to make decision independently.</p><h5 id="filtering-missing-values"><span class="mr-2"><strong>Filtering missing values</strong></span><a href="#filtering-missing-values" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h5></h5><p>Apart form that, by running <code class="language-plaintext highlighter-rouge">air_data.isna().sum()</code>, we can see if there is any missing value in each feature.</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>air_data=air_data[(air_data.age &gt;18) &amp; (air_data.age&lt;80)]
+air_data=air_data[(air_data.EXPENSE_SUM_YR_1.notna())&amp;(air_data.EXPENSE_SUM_YR_2.notna())&amp;(air_data.age.notna())] 
+</pre></table></code></div></div><p>The above code only picks up clients who are between 18 and 80 years old and some of their features shouldn’t be missing. This makes our analysis more sensible.</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>print(air_data["EXPENSE_SUM_YR_1"].value_counts())
+print(air_data["EXPENSE_SUM_YR_2"].value_counts())
+</pre></table></code></div></div><p>After that we want to check to what are values of EXPENSE_SUM_YR_1/2 which means the expense in year 1 &amp; 2 (let’s suppose it’s last year and the year before last). The results show as follows: <img data-src="https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/expense1-2.png" alt="" data-proofer-ignore></p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>air_data=air_data[(air_data.EXPENSE_SUM_YR_1!=0)|(air_data.EXPENSE_SUM_YR_2!=0)] # if the case's expense in two consecutive years is zero, then drop it.
+</pre></table></code></div></div><h5 id="gender"><span class="mr-2"><strong>Gender</strong></span><a href="#gender" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h5></h5><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre>print(air_data["GENDER"].value_counts()) # 1 for male and 0 for female
+plt.pie(air_data["GENDER"].value_counts(),labels=["M","F"],autopct='%1.1f%%',colors=sns.color_palette())
+plt.title("Male &amp; Female customers")
+#plt.savefig("men&amp;women.png",dpi=400)
+plt.show()
+</pre></table></code></div></div><p><img data-src="https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/m_f.png" alt="" data-proofer-ignore><br /> Almost third fourths of customers are male. Then what can we do for more useful information?</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre><td class="rouge-code"><pre>print(air_data.groupby(["GENDER"])["runoff_flag"].value_counts().loc[:,[0,1]])
+xlabel=["F","M"]
+y_0=air_data.groupby(["GENDER"])["runoff_flag"].value_counts().loc[:,0]
+y_1=air_data.groupby(["GENDER"])["runoff_flag"].value_counts().loc[:,1]
+bar_width=0.3
+plt.bar(range(len(xlabel)),y_0,label="stayed",width=bar_width,color="blue")
+plt.bar(np.arange(len(xlabel))+bar_width,y_1,label="lost",width=bar_width,color="red")
+plt.rcParams['font.sans-serif']=['SimHei']
+plt.xticks(range(len(xlabel)),xlabel)
+plt.ylabel("Number of customers")
+plt.title("Stayed and lost clients in gender group")
+plt.legend()
+plt.show()
+</pre></table></code></div></div><p><img data-src="https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/cust_lost_all.png" alt="" data-proofer-ignore></p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre>#if there is a significant difference for male and female client loss
+from scipy.stats import chi2_contingency
+table = [[8115,6340],[30032,17022]]
+chi2,pval,dof,expected = chi2_contingency(table)
+print("Null hypothesis：There is no significant difference between gender group")
+if pval &lt; 0.05:
+    print("Refuse null hypothesis(choose backup), there is a signigicant difference")
+else:
+    print("Accept null, there is no difference")
+</pre></table></code></div></div><p>As the result shows that there is a certain correlation between gender and clients losts.</p><h5 id="membership-level"><span class="mr-2"><strong>Membership level</strong></span><a href="#membership-level" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h5></h5><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre><td class="rouge-code"><pre># Convert the class into string format
+def classify(x):
+    if x==4.0:
+        return "4-class"
+    elif x==5.0:
+        return "5-class"
+    else:
+        return "6-class"
+air_data["FFP_TIER"]=air_data["FFP_TIER"].apply(classify)
+print(air_data["FFP_TIER"].value_counts())
+# drawing bar chart for the number of customers at different membership levels
+plt.bar(air_data["FFP_TIER"].value_counts().index,air_data["FFP_TIER"].value_counts(),color=sns.color_palette()[:3])
+plt.xticks([0,1,2],air_data["FFP_TIER"].value_counts().index)
+plt.xlabel("FFP_TIER")
+plt.ylabel("Number of customers")
+plt.title("Membership level and number")
+plt.show()
+</pre></table></code></div></div><p><img data-src="https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/FFP.png" alt="" data-proofer-ignore> Most of memberships are class-4, so I guess this is a general, basic level. Then let’s see if the level affects customer loss.</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre>xlabel=["4-class","5-class","6-class"]
+y_0=[33937,3236,1346]
+y_1=[24129,173,167]
+bar_width=0.3
+plt.bar(range(len(xlabel)),y_0,label="stayed",width=bar_width,color="blue")
+plt.bar(np.arange(len(xlabel))+bar_width,y_1,label="lost",width=bar_width,color="red")
+plt.xticks([0,1,2],xlabel)
+plt.ylabel("Number")
+plt.title("Customer lost at different membership levels")
+plt.legend()
+plt.show()
+</pre></table></code></div></div><p><img data-src="https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/lost_cust_class.png" alt="" data-proofer-ignore> Here from the bar chart, it’s clear that the higher class customers are more loyal. Most losses happen in the class-4 group. Thus, when it comes to taking actions to recall lost customers or keep retention, attention should be put on class-4 group. What’s more, if we want to prevent the situation from happening later, we should attract more customers to update to class-5/6 and raise their loyalty.</p><h5 id="membership-time"><span class="mr-2"><strong>Membership time</strong></span><a href="#membership-time" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h5></h5><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre>print(air_data.groupby("runoff_flag")["FFP_days"].describe())
+plt.boxplot([data.FFP_days[data.runoff_flag==0],data.FFP_days[data.runoff_flag==1]],labels=["stayed","lost"])
+plt.title("Stayed and lost customers as well as membership time")
+plt.show()
+</pre></table></code></div></div><p><img data-src="https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/FFP_days_all.png" alt="" data-proofer-ignore></p><h5 id="flights"><span class="mr-2"><strong>Flights</strong></span><a href="#flights" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h5></h5><p><img data-src="https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/Avg_flight_all.png" alt="" data-proofer-ignore><br /> Maybe this plot doesn’t make so much sense in axis-x. It shows how much the area of blue (stayed group) exceeds the red area. Of course, it makes sense that the flights of stayed group are larger.</p><h5 id="last-flight-time-gap"><span class="mr-2"><strong>Last flight time gap</strong></span><a href="#last-flight-time-gap" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h5></h5><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre>print(air_data["DAYS_FROM_LAST_TO_END"].value_counts())
+plt.bar(air_data["DAYS_FROM_LAST_TO_END"].value_counts().index,air_data["DAYS_FROM_LAST_TO_END"].value_counts(),color="blue")
+plt.title("The time of last flight to the end of observation")
+plt.xlabel("days")
+plt.ylabel("Number of people")
+plt.show()
+</pre></table></code></div></div><p><img data-src="https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/last2end.png" alt="" data-proofer-ignore> The plot measures the time from the last flight to the end of observation time. For example, those cases whose gap is 400+ days mean the last time they choose the airline is about 1+ years ago.</p><h5 id="others"><span class="mr-2"><strong>Others</strong></span><a href="#others" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h5></h5><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>print(air_data.groupby("runoff_flag")["WEIGHTED_SEG_KM"].describe())
+print(air_data.groupby("runoff_flag")["avg_discount"].describe())
+</pre></table></code></div></div><h3 id="prediction-with-machine-learning"><span class="mr-2">Prediction with machine learning</span><a href="#prediction-with-machine-learning" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3></h3><p>So far we’ve done pretty much about knowing the customers. This section we should do the prediction task.</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre>air_data_ = air_data.iloc[:,:53]
+air_data_["FFP_days"]=air_data["FFP_days"]
+air_data_ = air_data_.join(pd.get_dummies(air_data.FFP_TIER))#独热编码
+del air_data_["FFP_TIER"]
+air_data_["label"]=air_data["runoff_flag"]
+air_data_.head()
+</pre></table></code></div></div><p>Since the membership level is string format with three different types, they should be converted into one-hot encoding. As a result of that, class-4 would be [1, 0, 0] and class-5 should be [0, 1, 0] and class-6 is [0, 0, 1].</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre>X=air_data_.iloc[:,:-1]
+y=air_data_.iloc[:,-1]
+scaler=StandardScaler()
+X_=scaler.fit_transform(X)
+X_train,X_test,y_train,y_test=train_test_split(X_,y,train_size=0.75,random_state=123)
+</pre></table></code></div></div><p>Use <em>train_test_split</em> to divide the original data and get ready for model input.</p><h4 id="linear-regression"><span class="mr-2"><strong>Linear Regression</strong></span><a href="#linear-regression" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4></h4><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre><td class="rouge-code"><pre>log_reg = LogisticRegression(max_iter=1000)
+start=time.perf_counter()
+log_reg.fit(X_train,y_train)
+end=time.perf_counter()
+print("LogisticRgression model")
+print("Training costs:",end-start,"s")
+log_reg_y_pre=log_reg.predict(X_test)
+print("LR accuracy：",accuracy_score(y_test,log_reg_y_pre))
+#===================================#
+log_reg_y_predict=log_reg.predict_proba(X_test)
+print("AUC score：",roc_auc_score(y_test,log_reg_y_predict[:,1]))
+print("Confusion matrix\n",confusion_matrix(y_test,log_reg_y_pre))
+</pre></table></code></div></div><p>The above block returns a very high accuracy–0.99 on test dataset. Nevertheless, the extremely high accuracy is not necessarily a good sign because it could be overfitting. Overfitting happens when the model focuses too much on the provided data and it may lost the generalization when encountering unseen data or some noises.</p><h4 id="random-forest"><span class="mr-2"><strong>Random Forest</strong></span><a href="#random-forest" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4></h4><p>Random forest is a kind of ensemble learning. There is less chance for this model to overfit on this dataset. The model is also usually more robust. But there are actually many key hyperparameters to set up. In order to gain the optimal one, we use <em>GridSearchCV</em>.</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre>param_grid = [{'n_estimators': [20,25,30,35,40,45,50], 'max_depth': [5,6,7,8,9,10]}]
+rnd_reg = RandomForestClassifier(random_state=123)
+grid_search = GridSearchCV(rnd_reg, param_grid, cv=5,scoring='roc_auc')
+grid_search.fit(X_train,y_train)
+print("Best parameter combination:",grid_search.best_params_)
+print("Best score:",grid_search.best_score_)
+</pre></table></code></div></div><p>The best parameter combination is max_depth as 10 and n_estimator as 45.</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre><td class="rouge-code"><pre>rnd=RandomForestClassifier(n_estimators=45,max_depth=10,random_state=123,oob_score=True)#
+start=time.perf_counter()
+rnd.fit(X_train,y_train)
+end=time.perf_counter()
+print("Random Forest")
+print("Training costs:",end-start,"s")
+rnd_y_pre=rnd.predict(X_test)
+print("Prediction accuracy",accuracy_score(y_test,rnd_y_pre))
+#===================================#
+rnd_y_predict=rnd.predict_proba(X_test)
+print("AUC score：",roc_auc_score(y_test,rnd_y_predict[:,1]))
+print("Confusion matrix\n",confusion_matrix(y_test,rnd_y_pre))
+print("Out of bag score；",rnd.oob_score_)
+</pre></table></code></div></div><p>The accuracy ends up with 0.98 which is almost perfect.</p><h4 id="cross-validation"><span class="mr-2"><strong>Cross-validation</strong></span><a href="#cross-validation" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4></h4><p>Finally we check the model with k-fold validation:</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre>from sklearn.model_selection import cross_val_score
+scores=cross_val_score(rnd,X_train,y_train,cv=5)
+print('Scores:',scores)
+print('Average scores:',scores.mean())
+</pre></table></code></div></div><p><img data-src="https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/cross-validation.png" alt="" data-proofer-ignore></p><h3 id="result-analysis"><span class="mr-2">Result analysis</span><a href="#result-analysis" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3></h3><p>The last part we may want to see which feature contributes the most in prediction. This is important for the explainability of the model.</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre>feature_names=list(air_data_.columns)
+res =sorted(zip(map(lambda x: round(x, 4),rnd.feature_importances_), feature_names), reverse=True)  
+names=[feature[1] for feature in res[:15]]
+importances=[feature[0] for feature in res[:15]]
+plt.figure(figsize=(15,6))  
+plt.bar(x=0,bottom=np.arange(len(names),0,-1), height=0.5, width=importances, orientation="horizontal")
+plt.yticks(np.arange(len(names),0,-1),names)
+plt.title("Importance of features")
+plt.show()
+</pre></table></code></div></div><p><img data-src="https://raw.githubusercontent.com/goodeda/goodeda.github.io/main/assets/post_img/airline_project/important_feature.png" alt="" data-proofer-ignore> Aha, the days_from_last_to_end and max_flight_interval rank top 2.</p><p>This project goes through almost the entire process of data analysis and applying machine learning in prediction. The final score looks pretty good. However, I know in real life the case will be much more complex and lots of information could be missing because of certain regulations or individual wills. The prediction is also not that easy to make. In a word, this is an introductory example of how to use machine learning in analysis. In my opinion, sometimes the core of data analysis is not complex models or algorithms but the business insights and the interpretation of the results based on one’s accumulated experience and intuition. That is what really matters. I put all code in jupyter notebook and store it <a href="https://colab.research.google.com/drive/1J-_hefp7EKIl5CmFce8ZXG4pn0nBgDc3?usp=sharing">here</a>.</p></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/categories/english/'>English</a>, <a href='/categories/projects/'>Projects</a></div><div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/projects/" class="post-tag no-text-decoration" >Projects</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/"> CC BY 4.0 </a> by the author.</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=Analyse the loss of airline client - Zhixu&amp;url=https://goodeda.github.io/posts/Prediction-of-client-loss/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=Analyse the loss of airline client - Zhixu&amp;u=https://goodeda.github.io/posts/Prediction-of-client-loss/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://t.me/share/url?url=https://goodeda.github.io/posts/Prediction-of-client-loss/&amp;text=Analyse the loss of airline client - Zhixu" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i id="copy-link" class="fa-fw fas fa-link small" data-toggle="tooltip" data-placement="top" title="Copy link" data-title-succeed="Link copied successfully!"> </i> </span></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted"><div class="access"><div id="access-lastmod" class="post"><div class="panel-heading">Recently Updated</div><ul class="post-content pl-0 pb-1 ml-1 mt-2"><li><a href="/posts/SVD-PCA/">PCA & SVD</a><li><a href="/posts/app-visual/">App analysis with review information on google play</a><li><a href="/posts/Power-BI-Practice/">Power BI practice for data visualization</a><li><a href="/posts/Logistic-Regression/">Logistic Regression</a><li><a href="/posts/bisystem/">Virtual machine on Windows</a></ul></div><div id="access-tags"><div class="panel-heading">Trending Tags</div><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/p%C3%A4iv%C3%A4kirja/">päiväkirja</a> <a class="post-tag" href="/tags/math/">math</a> <a class="post-tag" href="/tags/projects/">Projects</a> <a class="post-tag" href="/tags/data-structure-algorithm/">data-structure-algorithm</a> <a class="post-tag" href="/tags/language-learning/">Language-learning</a> <a class="post-tag" href="/tags/linux/">Linux</a> <a class="post-tag" href="/tags/nlp/">NLP</a> <a class="post-tag" href="/tags/power-bi/">POWER-BI</a> <a class="post-tag" href="/tags/visualization/">Visualization,</a> <a class="post-tag" href="/tags/word-segmentation/">word-segmentation</a></div></div></div><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.js"></script><div id="toc-wrapper" class="pl-0 pr-4 mb-5"><div class="panel-heading pl-3 pt-2 mb-2">Contents</div><nav id="toc" data-toggle="toc"></nav></div></div></div><div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="tail-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><div id="related-posts" class="mt-5 mb-2 mb-sm-4"><h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3><div class="card-deck mb-4"><div class="card"> <a href="/posts/Text-classification-with-BERT/"><div class="card-body"> <em class="timeago small" data-ts="1651384800" > 2022-05-01 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Text Multilabel Classification using BERT</h3><div class="text-muted small"><p> Project introduction In this project, the goal is to do multilabel classification. A piece of news can be related to only one topic or several. The task is training a model to classify relevant the...</p></div></div></a></div><div class="card"> <a href="/posts/Hackathon22/"><div class="card-body"> <em class="timeago small" data-ts="1653939720" > 2022-05-30 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>DHH22 Hackathon Project</h3><div class="text-muted small"><p> Project Background The project is a topic of Helsinki Digital Humanities Hackathon 2022.The theme is Network of Parlamint. The data include national parliament speeches of 17 european countries. We...</p></div></div></a></div><div class="card"> <a href="/posts/SSH-KEY/"><div class="card-body"> <em class="timeago small" data-ts="1661369400" > 2022-08-24 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Password-less for connecting Github and remote server</h3><div class="text-muted small"><p> I used to enter the password when pushing file to Github or connecting to remote server. I always feel this step redundant and recently came to konw that SSH is a good solution. I want to record th...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <a href="/posts/Hackathon22/" class="btn btn-outline-primary" prompt="Older"><p>DHH22 Hackathon Project</p></a> <a href="/posts/Yksi-vuosi-suomessa/" class="btn btn-outline-primary" prompt="Newer"><p>Elämäni Suomessa</p></a></div><script type="text/javascript"> $(function () { const origin = "https://giscus.app"; const iframe = "iframe.giscus-frame"; const lightTheme = "light"; const darkTheme = "dark_dimmed"; let initTheme = lightTheme; if ($("html[data-mode=dark]").length > 0 || ($("html[data-mode]").length == 0 && window.matchMedia("(prefers-color-scheme: dark)").matches)) { initTheme = darkTheme; } let giscusAttributes = { "src": "https://giscus.app/client.js", "data-repo": "goodeda/goodeda.github.io", "data-repo-id": "", "data-category": "", "data-category-id": "", "data-mapping": "pathname", "data-reactions-enabled": "1", "data-emit-metadata": "0", "data-theme": initTheme, "data-input-position": "bottom", "data-lang": "en", "crossorigin": "anonymous", "async": "" }; let giscusScript = document.createElement("script"); Object.entries(giscusAttributes).forEach(([key, value]) => giscusScript.setAttribute(key, value)); document.getElementById("tail-wrapper").appendChild(giscusScript); addEventListener("message", (event) => { if (event.source === window && event.data && event.data.direction === ModeToggle.ID) { /* global theme mode changed */ const mode = event.data.message; const theme = (mode === ModeToggle.DARK_MODE ? darkTheme : lightTheme); const message = { setConfig: { theme: theme } }; const giscus = document.querySelector(iframe).contentWindow; giscus.postMessage({ giscus: message }, origin); } }); }); </script></div></div></div><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center text-muted"><div class="footer-left"><p class="mb-0"> © 2022 <a href="https://github.com/username">zhixu</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div><div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a> theme.</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-sm-11 post-content"><div id="search-hints"><div id="access-tags"><div class="panel-heading">Trending Tags</div><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/p%C3%A4iv%C3%A4kirja/">päiväkirja</a> <a class="post-tag" href="/tags/math/">math</a> <a class="post-tag" href="/tags/projects/">Projects</a> <a class="post-tag" href="/tags/data-structure-algorithm/">data-structure-algorithm</a> <a class="post-tag" href="/tags/language-learning/">Language-learning</a> <a class="post-tag" href="/tags/linux/">Linux</a> <a class="post-tag" href="/tags/nlp/">NLP</a> <a class="post-tag" href="/tags/power-bi/">POWER-BI</a> <a class="post-tag" href="/tags/visualization/">Visualization,</a> <a class="post-tag" href="/tags/word-segmentation/">word-segmentation</a></div></div></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script> <script src="https://cdn.jsdelivr.net/combine/npm/magnific-popup@1/dist/jquery.magnific-popup.min.js,npm/lozad/dist/lozad.min.js,npm/clipboard@2/dist/clipboard.min.js"></script> <script src="https://cdn.jsdelivr.net/combine/npm/dayjs@1/dayjs.min.js,npm/dayjs@1/locale/en.min.js,npm/dayjs@1/plugin/relativeTime.min.js,npm/dayjs@1/plugin/localizedFormat.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.bundle.min.js"></script> <script defer src="/app.js"></script>
